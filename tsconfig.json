@@ -18,5 +18,7 @@
       "dom"
     ],
     "useDefineForClassFields": false
-  }
+  },
+  "exclude": ["cypress.config.ts"],
+  "files": ["cypress.config.ts"]
 }
