@@ -21,7 +21,21 @@ import {OCT} from '../../dl-date-time-picker/specs/month-constants';
 class DateModelComponent {
   dateValue: number;
   @ViewChild(DlDateTimeInputDirective, {static: false}) input: DlDateTimeInputDirective<number>;
-  dateTimeFilter: (value: (number | null)) => boolean = () => true;
+  dateTimeFilter: (value: number | null) => boolean = () => true;
+}
+
+@Component({
+  template: `
+    <form>
+      <input id="dateInput" name="dateValue" type="text" dlDateTimeInput [dlDateTimeInputFilter]="dateTimeFilter"
+             [(ngModel)]="dateValue" />
+    </form>
+  `,
+})
+class UndefinedDateModelComponent {
+  dateValue: number;
+  @ViewChild(DlDateTimeInputDirective, { static: false }) input: DlDateTimeInputDirective<number>;
+  dateTimeFilter?: ((value: number | null) => boolean) | null;
 }
 
 describe('DlDateTimeInputDirective', () => {
@@ -154,40 +168,20 @@ describe('DlDateTimeInputDirective', () => {
       expect(inputElement.classList).toContain('ng-invalid');
 
       const control = debugElement.children[0].injector.get(NgForm).control.get('dateValue');
+      if (!control) {
+        fail('expected a dateValue control, but found none');
+        return;
+      }
       expect(control.hasError('dlDateTimeInputParse')).toBe(true);
-      expect(control.errors.dlDateTimeInputParse.text).toBe('very-valid-date');
+      expect(control.errors?.dlDateTimeInputParse.text).toBe('very-valid-date');
     }));
-
-    it('should not error if dateTimeFilter is undefined', () => {
-      component.dateTimeFilter = undefined;
-      fixture.detectChanges();
-
-      const inputElement = debugElement.query(By.directive(DlDateTimeInputDirective)).nativeElement;
-      inputElement.value = '10/29/2018 05:00 PM';
-      inputElement.dispatchEvent(new Event('input'));
-      fixture.detectChanges();
-
-      expect(inputElement.classList).toContain('ng-valid');
-    });
-
-    it('should not error if dateTimeFilter is null', () => {
-      component.dateTimeFilter = null;
-      fixture.detectChanges();
-
-      const inputElement = debugElement.query(By.directive(DlDateTimeInputDirective)).nativeElement;
-      inputElement.value = '10/29/2018 05:00 PM';
-      inputElement.dispatchEvent(new Event('input'));
-      fixture.detectChanges();
-
-      expect(inputElement.classList).toContain('ng-valid');
-    });
 
     it('should add ng-invalid for input of filtered out date', () => {
       const expectedErrorValue = moment('2018-10-29T17:00').valueOf();
 
       const allowedValue = moment('2019-10-29T17:00').valueOf();
 
-      spyOn(component, 'dateTimeFilter').and.callFake((date: number) => {
+      spyOn(component, 'dateTimeFilter').and.callFake((date: number | null) => {
         return date === allowedValue;
       });
 
@@ -199,8 +193,12 @@ describe('DlDateTimeInputDirective', () => {
       expect(inputElement.classList).toContain('ng-invalid');
 
       const control = debugElement.children[0].injector.get(NgForm).control.get('dateValue');
+      if (!control) {
+        fail('expected a dateValue control, but found none');
+        return;
+      }
       expect(control.hasError('dlDateTimeInputFilter')).toBe(true);
-      const value = control.errors.dlDateTimeInputFilter.value;
+      const value = control.errors?.dlDateTimeInputFilter.value;
       expect(value).toBe(expectedErrorValue);
     });
 
@@ -209,7 +207,7 @@ describe('DlDateTimeInputDirective', () => {
       // should change to ng-valid when the model is updated to an allowed date.
 
       const allowedValue = moment('2019-10-29T17:00').valueOf();
-      spyOn(component, 'dateTimeFilter').and.callFake((date: number) => {
+      spyOn(component, 'dateTimeFilter').and.callFake((date: number | null) => {
         return date === allowedValue;
       });
 
@@ -235,7 +233,7 @@ describe('DlDateTimeInputDirective', () => {
       // should change to ng-valid when the model is updated to an allowed date.
 
       const allowedValue = moment('2019-10-29T17:00').valueOf();
-      spyOn(component, 'dateTimeFilter').and.callFake((date: number) => {
+      spyOn(component, 'dateTimeFilter').and.callFake((date: number | null) => {
         return date === allowedValue;
       });
 
@@ -285,6 +283,41 @@ describe('DlDateTimeInputDirective', () => {
 
       expect(changeSpy).toHaveBeenCalled();
       expect(changeSpy.calls.first().args[0].value).toBe(expected);
+    });
+  });
+
+  describe('undefined/null dateTimeFilter', () => {
+    let component: UndefinedDateModelComponent;
+    let fixture: ComponentFixture<UndefinedDateModelComponent>;
+    let debugElement: DebugElement;
+
+    beforeEach(async () => {
+      fixture = TestBed.createComponent(UndefinedDateModelComponent);
+      fixture.detectChanges();
+      await fixture.whenStable().then(() => {
+      fixture.detectChanges();
+        component = fixture.componentInstance;
+        debugElement = fixture.debugElement;
+      });
+    });
+
+    it('should not error if dateTimeFilter is undefined', () => {
+      const inputElement = debugElement.query(By.directive(DlDateTimeInputDirective)).nativeElement;
+      inputElement.value = '10/29/2018 05:00 PM';
+      inputElement.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      expect(inputElement.classList).toContain('ng-valid');
+    });
+
+    it('should not error if dateTimeFilter is null', () => {
+      component.dateTimeFilter = null;
+      fixture.detectChanges();
+
+      const inputElement = debugElement.query(By.directive(DlDateTimeInputDirective)).nativeElement;
+      inputElement.value = '10/29/2018 05:00 PM';
+      inputElement.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      expect(inputElement.classList).toContain('ng-valid');
     });
   });
 });
