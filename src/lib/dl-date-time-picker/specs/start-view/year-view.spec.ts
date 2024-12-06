@@ -311,9 +311,13 @@ describe('DlDateTimePickerComponent', () => {
     it('should change .dl-abdtp-active element on right arrow', () => {
       const activeElement = fixture.debugElement.query(By.css('.dl-abdtp-active'));
       expect(activeElement.nativeElement.textContent).toBe('2017');
-
+      
       activeElement.nativeElement.focus();
-      expect(document.activeElement).withContext(document.activeElement.outerHTML).toBe(activeElement.nativeElement);
+      if (document.activeElement === null) {
+        fail('expected an active element, but found none');
+      } else {
+        expect(document.activeElement).withContext(document.activeElement.outerHTML).toBe(activeElement.nativeElement);
+      }
 
       dispatchKeyboardEvent(activeElement.nativeElement, 'keydown', RIGHT_ARROW);
 
