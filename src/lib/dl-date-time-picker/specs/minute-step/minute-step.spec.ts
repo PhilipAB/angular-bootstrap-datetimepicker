@@ -18,7 +18,7 @@ import {DlDateTimeNumberModule, DlDateTimePickerComponent, DlDateTimePickerModul
   template: '<dl-date-time-picker [minuteStep]="minuteStep" startView="minute"></dl-date-time-picker>'
 })
 class MinuteStepComponent {
-  minuteStep = 1;
+  minuteStep?: number | null = 1;
   @ViewChild(DlDateTimePickerComponent, {static: false}) picker: DlDateTimePickerComponent<number>;
 }
 
