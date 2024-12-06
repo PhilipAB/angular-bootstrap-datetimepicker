@@ -313,7 +313,7 @@ describe('DlDateTimePickerComponent', () => {
       expect(activeElement.nativeElement.textContent).toBe('2017');
       
       activeElement.nativeElement.focus();
-      if (document.activeElement === null) {
+      if (!document.activeElement) {
         fail('expected an active element, but found none');
       } else {
         expect(document.activeElement).withContext(document.activeElement.outerHTML).toBe(activeElement.nativeElement);
