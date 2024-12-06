@@ -24,6 +24,6 @@ export class DlDateAdapterNative extends DlDateAdapter<Date> {
    *  a `value.getTime()` result for the specified `Date` or `null`.
    */
   toMilliseconds(value: Date | null): number | null {
-    return (value) ? value.getTime() : undefined;
+    return (value) ? value.getTime() : null;
   }
 }
