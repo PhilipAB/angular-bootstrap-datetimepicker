@@ -12,6 +12,7 @@ import {
 import {OCT} from '../../dl-date-time-picker/specs/month-constants';
 
 @Component({
+  selector: 'dl-date-model-test',
   template: `
       <form>
           <input id="dateInput" name="dateValue" type="text" dlDateTimeInput [dlDateTimeInputFilter]="dateTimeFilter"
@@ -25,6 +26,7 @@ class DateModelComponent {
 }
 
 @Component({
+  selector: 'dl-date-model-test:not(p)',
   template: `
     <form>
       <input id="dateInput" name="dateValue" type="text" dlDateTimeInput [dlDateTimeInputFilter]="dateTimeFilter"
@@ -49,6 +51,7 @@ describe('DlDateTimeInputDirective', () => {
       ],
       declarations: [
         DateModelComponent,
+        UndefinedDateModelComponent
       ]
     }).compileComponents();
   });
