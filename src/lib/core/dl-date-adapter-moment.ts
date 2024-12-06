@@ -26,6 +26,6 @@ export class DlDateAdapterMoment extends DlDateAdapter<Moment> {
    *  a `moment.valueOf()` result for the specified `moment` or `null`
    */
   toMilliseconds(value: Moment | null): number | null {
-    return (value) ? value.valueOf() : undefined;
+    return (value) ? value.valueOf() : null;
   }
 }
