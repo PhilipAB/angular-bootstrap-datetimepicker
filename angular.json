@@ -10,7 +10,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
@@ -138,6 +138,5 @@
         }
       }
     }
-  },
-  "defaultProject": "angular-bootstrap-datetimepicker"
+  }
 }
