@@ -42,8 +42,8 @@ describe('DlDateAdapterString', () => {
       it('should accept "lll" moment format', () => {
         expect(dateAdapter.toMilliseconds(testMoment.format('lll'))).toEqual(1523077200000);
       });
-      it('should return undefined for invalid date value', () => {
-        expect(dateAdapter.toMilliseconds('Aor 7, 2018 12:00 AM')).toBeUndefined();
+      it('should return null for invalid date value', () => {
+        expect(dateAdapter.toMilliseconds('Aor 7, 2018 12:00 AM')).toBeNull();
       });
     });
   });
