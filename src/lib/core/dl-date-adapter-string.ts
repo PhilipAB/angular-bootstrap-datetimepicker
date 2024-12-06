@@ -51,7 +51,8 @@ export class DlDateAdapterString extends DlDateAdapter<string> {
   toMilliseconds(value: string | null): number | null {
     if (value !== undefined && value !== null) {
       const newMoment = moment(value, this.inputFormats, true);
-      return newMoment.isValid() ? newMoment.valueOf() : undefined;
+      return newMoment.isValid() ? newMoment.valueOf() : null;
     }
+    return null;
   }
 }
