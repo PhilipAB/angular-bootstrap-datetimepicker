@@ -16,6 +16,7 @@ import {APR, MAY, OCT} from '../month-constants';
 import moment from 'moment';
 
 @Component({
+  selector: 'dl-start-date-test',
   template: '<dl-date-time-picker [startDate]="startDate" [(ngModel)]="selectedDate"></dl-date-time-picker>'
 })
 class StartDateComponent {
@@ -25,6 +26,7 @@ class StartDateComponent {
 }
 
 @Component({
+  selector: 'dl-start-date-test:not(p)',
   template: '<dl-date-time-picker [startDate]="startDate" [(ngModel)]="selectedDate"></dl-date-time-picker>'
 })
 class UndefinedStartDateComponent {

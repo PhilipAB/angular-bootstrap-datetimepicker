@@ -14,6 +14,7 @@ import {By} from '@angular/platform-browser';
 import {DlDateTimeNumberModule, DlDateTimePickerComponent, DlDateTimePickerModule} from '../../../public-api';
 
 @Component({
+  selector: 'dl-minute-step-test',
   template: '<dl-date-time-picker [minuteStep]="minuteStep" startView="minute"></dl-date-time-picker>'
 })
 class MinuteStepComponent {
@@ -22,6 +23,7 @@ class MinuteStepComponent {
 }
 
 @Component({
+  selector: 'dl-minute-step-test:not(p)',
   template: '<dl-date-time-picker [minuteStep]="minuteStep" startView="minute"></dl-date-time-picker>'
 })
 class UndefinedMinuteStepComponent {
