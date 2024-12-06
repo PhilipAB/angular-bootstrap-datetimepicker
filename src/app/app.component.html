@@ -3,14 +3,18 @@
     <div class="form-group">
       <label for="maxView">Max View:</label>
       <select id="maxView" [(ngModel)]="maxView"  class="form-control">
-        <option *ngFor="let view of views" [value]="view" [disabled]="isMaxViewDisabled(view)">{{view}}</option>
+        @for (view of views; track view) {
+          <option [value]="view" [disabled]="isMaxViewDisabled(view)">{{view}}</option>
+        }
       </select>
       <small class="form-text text-muted"><code>maxView</code> must be &gt;= <code>minView</code> and <code>startView</code></small>
     </div>
     <div class="form-group">
       <label for="minView">Min View:</label>
       <select id="minView" [(ngModel)]="minView"  class="form-control">
-        <option *ngFor="let view of views" [value]="view" [disabled]="isMinViewDisabled(view)">{{view}}</option>
+        @for (view of views; track view) {
+          <option [value]="view" [disabled]="isMinViewDisabled(view)">{{view}}</option>
+        }
       </select>
       <small class="form-text text-muted"><code>minView</code> must be &lt;= <code>maxView</code> and <code>startView</code></small>
       <small class="form-text text-muted"><code>minView</code> determines when selection is triggered. </small>
@@ -18,7 +22,9 @@
     <div class="form-group">
       <label for="startView">Start View:</label>
       <select id="startView" [(ngModel)]="startView"  class="form-control" (change)="refresh()">
-        <option *ngFor="let view of views" [value]="view" [disabled]="isStartViewDisabled(view)">{{view}}</option>
+        @for (view of views; track view) {
+          <option [value]="view" [disabled]="isStartViewDisabled(view)">{{view}}</option>
+        }
       </select>
       <small class="form-text text-muted"><code>startView</code> must be between (or equal to) <code>maxView</code> and <code>minView</code></small>
     </div>
@@ -57,28 +63,30 @@
   </div>
 
   <div class="col">
-      <pre class="bg-light">
+    <pre class="bg-light">
       <code>
-  &lt;dl-date-time-picker
-    maxView=&#x22;{{maxView}}&#x22;
-    minView=&#x22;{{minView}}&#x22;
-    startView=&#x22;{{startView}}&#x22;
-    minuteStep=&#x22;{{minuteStep}}&#x22;
-    [(ngModel)]="selectedDate"
-  &gt;
-  &lt;/dl-date-time-picker&gt;</code>
+        &lt;dl-date-time-picker
+        maxView=&#x22;{{maxView}}&#x22;
+        minView=&#x22;{{minView}}&#x22;
+        startView=&#x22;{{startView}}&#x22;
+        minuteStep=&#x22;{{minuteStep}}&#x22;
+        [(ngModel)]="selectedDate"
+        &gt;
+      &lt;/dl-date-time-picker&gt;</code>
     </pre>
   </div>
   <div class="col mx-3" style="min-width:360px;">
-    <div class="border" *ngIf="showCalendar">
-      <dl-date-time-picker
-        [(maxView)]="maxView"
-        [(minView)]="minView"
-        [(startView)]="startView"
-        [(minuteStep)]="minuteStep"
-        [(ngModel)]="selectedDate"
+    @if (showCalendar) {
+      <div class="border">
+        <dl-date-time-picker
+          [(maxView)]="maxView"
+          [(minView)]="minView"
+          [(startView)]="startView"
+          [(minuteStep)]="minuteStep"
+          [(ngModel)]="selectedDate"
         (change)="onCustomDateChange($event)"></dl-date-time-picker>
-    </div>
+      </div>
+    }
     <p id="selectedDate">Selected Date: {{selectedDate}}</p>
   </div>
 </div>
