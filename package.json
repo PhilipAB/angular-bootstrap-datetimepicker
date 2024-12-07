@@ -94,7 +94,6 @@
     "moment": "^2.24.0",
     "ng-packagr": "^17.3.0",
     "open-iconic": "^1.1.1",
-    "popper.js": "^1.16.1",
     "rxjs": "^7.5.0",
     "scss-bundle": "^3.0.2",
     "semantic-release": "^23.0.8",
