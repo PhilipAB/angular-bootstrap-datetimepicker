@@ -22,5 +22,10 @@ jobs:
         with:
           node-version: '22.11.0'
 
+      - name: Install Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
       - name: Install dependencies and Run Tests
         run: npm clean-install-test
