@@ -14,12 +14,12 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.2.2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.1.0
         with:
-          node-version: '14.x'
+          node-version: '22.11.0'
 
       - name: Install dependencies and Run Tests
         run: npm clean-install-test
