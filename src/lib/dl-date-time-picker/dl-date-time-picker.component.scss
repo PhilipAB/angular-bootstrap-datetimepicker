@@ -69,3 +69,7 @@
   cursor: default;
   color: $dl-abdtp-disabled;
 }
+
+[class*="dl-abdtp-"][class*="-view"][data-dl-abdtp-view] {
+  padding-inline: calc(var(--bs-gutter-x) * .5);
+}
