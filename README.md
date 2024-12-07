@@ -1,5 +1,16 @@
 # Angular 13+ bootstrap date & time picker
 
+## Info about this fork
+
+**Note**: This npm package is a fork of dalelotts/angular-bootstrap-datetimepicker, to provide an Ivy-compiled build of the current master branch. The fork was necessary because the official npm package did not release a new version with ivy support, yet.
+
+**Usage:**:
+- For Angular < 13 you can fall back to the latest official release [here](https://www.npmjs.com/package/angular-bootstrap-datetimepicker).
+- For Angular >= 13 and <= 16 it is recommended to use v13
+- For Angular >= 17 it is recommended to use v17 of this library
+
+## Original docs...
+
 Native Angular (13+) datetime picker component styled by Twitter Bootstrap 4.
 
 [![npm downloads](https://img.shields.io/npm/dm/angular-bootstrap-datetimepicker.svg)](https://www.npmjs.com/package/angular-bootstrap-datetimepicker)

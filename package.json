@@ -1,18 +1,18 @@
 {
-  "name": "angular-bootstrap-datetimepicker",
-  "version": "0.0.0-semantic-release",
+  "name": "@philipab/angular-bootstrap-datetimepicker",
+  "version": "17.0.1",
   "engines": {
     "node": ">=18.13.0"
   },
   "license": "MIT",
-  "author": "https://github.com/dalelotts/angular-bootstrap-datetimepicker/graphs/contributors",
+  "author": "https://github.com/PhilipAB/angular-bootstrap-datetimepicker/graphs/contributors",
   "bugs": {
     "url": "https://github.com/dalelotts/angular-bootstrap-datetimepicker/issues"
   },
-  "homepage": "https://dalelotts.github.io/angular-bootstrap-datetimepicker",
+  "homepage": "https://github.com/PhilipAB/angular-bootstrap-datetimepicker",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dalelotts/angular-bootstrap-datetimepicker.git"
+    "url": "https://github.com/PhilipAB/angular-bootstrap-datetimepicker.git"
   },
   "keywords": [
     "angular",
@@ -102,5 +102,8 @@
   },
   "release": {
     "pkgRoot": "dist"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
